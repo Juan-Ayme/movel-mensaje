@@ -1,14 +1,16 @@
+import 'package:aplicacion_mensaje_m/config/theme/app_theme.dart';
 import 'package:aplicacion_mensaje_m/presentation/widgets/my_message_bubble.dart';
 import 'package:flutter/material.dart';
 
 class ChatSreen extends StatefulWidget {
-  const ChatSreen({super.key});
+  final Function(ThemeData) changeTheme;
+  const ChatSreen({super.key, required this.changeTheme});
 
   @override
-  State<ChatSreen> createState() => ChatSreenState();
+  State<ChatSreen> createState() => _ChatSreenState();
 }
 
-class ChatSreenState extends State<ChatSreen> {
+class _ChatSreenState extends State<ChatSreen> {
   int clickColors = 0;
 
   @override
@@ -26,19 +28,25 @@ class ChatSreenState extends State<ChatSreen> {
         actions: [
           _ButtonColor(
             onPressed: () {
-              setState(() {
-              });
+              //changeTheme(lo que envia es el ThemeData...)
+              widget.changeTheme(AppTheme(selectedColor: 0).theme());
             },
             color: const Color.fromARGB(246, 155, 163, 14),
-          )
+          ),
+          _ButtonColor(
+              onPressed: () {
+                widget.changeTheme(AppTheme(selectedColor: 1).theme());
+              },
+              color: const Color.fromARGB(246, 158, 24, 6)),
+          _ButtonColor(
+              onPressed: () {
+                widget.changeTheme(AppTheme(selectedColor: 2).theme());
+              },
+              color: Color.fromARGB(246, 33, 153, 222))
         ],
       ),
       body: _ChatView(),
     );
-  }
-
-  int colores() {
-    return clickColors;
   }
 }
 
@@ -48,15 +56,15 @@ class _ButtonColor extends StatelessWidget {
   const _ButtonColor({required this.onPressed, required this.color});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: IconButton(
+    return  IconButton(
             onPressed: onPressed,
             icon: Container(
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-                child: const Icon(null))));
+                child: const Icon(null)
+                )
+              );
   }
 }
 
