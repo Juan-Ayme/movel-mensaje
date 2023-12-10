@@ -1,4 +1,5 @@
 import 'package:aplicacion_mensaje_m/config/theme/app_theme.dart';
+import 'package:aplicacion_mensaje_m/presentation/widgets/her_message_bubble.dart';
 import 'package:aplicacion_mensaje_m/presentation/widgets/my_message_bubble.dart';
 import 'package:flutter/material.dart';
 
@@ -56,15 +57,13 @@ class _ButtonColor extends StatelessWidget {
   const _ButtonColor({required this.onPressed, required this.color});
   @override
   Widget build(BuildContext context) {
-    return  IconButton(
-            onPressed: onPressed,
-            icon: Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-                child: const Icon(null)
-                )
-              );
+    return IconButton(
+        onPressed: onPressed,
+        icon: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            child: const Icon(null)));
   }
 }
 
@@ -80,7 +79,9 @@ class _ChatView extends StatelessWidget {
                 child: ListView.builder(
               itemCount: 100,
               itemBuilder: (context, index) {
-                return const MyMessageBubble();
+                return (index % 2 == 0)
+                    ? const HerMessageBubble()
+                    : const MyMessageBubble();
               },
             )),
             const Text('Mundo')
