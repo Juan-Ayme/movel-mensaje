@@ -1,6 +1,7 @@
 import 'package:aplicacion_mensaje_m/config/theme/app_theme.dart';
 import 'package:aplicacion_mensaje_m/presentation/widgets/her_message_bubble.dart';
 import 'package:aplicacion_mensaje_m/presentation/widgets/my_message_bubble.dart';
+import 'package:aplicacion_mensaje_m/presentation/widgets/shared/message_field_box.dart';
 import 'package:flutter/material.dart';
 
 class ChatSreen extends StatefulWidget {
@@ -84,7 +85,8 @@ class _ChatView extends StatelessWidget {
                     : const MyMessageBubble();
               },
             )),
-            const Text('Mundo')
+            //Caja de texto de mensaje
+            const MessageFieldBox(),
           ],
         ),
       ),
