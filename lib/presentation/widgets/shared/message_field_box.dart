@@ -17,7 +17,7 @@ class MessageFieldBox extends StatelessWidget {
         filled: true,
         suffixIcon: IconButton(
             onPressed: () {
-              print('Valor de la caj de texto');
+              print('Valor de la caja de texto');
             },
             icon: const Icon(Icons.send_outlined)));
 
