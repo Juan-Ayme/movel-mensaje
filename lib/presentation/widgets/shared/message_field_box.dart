@@ -5,7 +5,6 @@ class MessageFieldBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
 
     final outlineImputBorder = OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.transparent),
