@@ -1,5 +1,7 @@
+import 'package:aplicacion_mensaje_m/presentation/providers/chat_provider.dart';
 import 'package:aplicacion_mensaje_m/presentation/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -21,12 +23,17 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Aplicacion Mensaje',
-        debugShowCheckedModeBanner: false,
-        theme: themeData,
-        home: ChatSreen(
-          changeTheme: changeTheme,
-        ));
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ChatProvider())
+      ],
+      child: MaterialApp(
+          title: 'Aplicacion Mensaje',
+          debugShowCheckedModeBanner: false,
+          theme: themeData,
+          home: ChatSreen(
+            changeTheme: changeTheme,
+          )),
+    );
   }
 }
