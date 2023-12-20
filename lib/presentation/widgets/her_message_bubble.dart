@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HerMessageBubble extends StatelessWidget {
-  const HerMessageBubble({super.key});
+  final  String message;
+  const HerMessageBubble({super.key,required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +13,11 @@ class HerMessageBubble extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
               color: color.secondary, borderRadius: BorderRadius.circular(20)),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child:  Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              'Hola mundo',
-              style: TextStyle(color: Colors.white),
+              message,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -50,12 +51,15 @@ class _ImageBubble extends StatelessWidget {
               return child;
             }
             return SizedBox(
-              width: size.width*0.8,
+              width: size.width * 0.8,
               height: 170,
               child: Center(
-                child: CircularProgressIndicator(value: loadingProgress.expectedTotalBytes!=null
-                  ? loadingProgress.cumulativeBytesLoaded/loadingProgress.expectedTotalBytes!
-                  :null,),
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
               ),
             );
           },

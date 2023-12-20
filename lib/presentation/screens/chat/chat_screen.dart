@@ -1,8 +1,11 @@
 import 'package:aplicacion_mensaje_m/config/theme/app_theme.dart';
+import 'package:aplicacion_mensaje_m/domain/entities/message.dart';
+import 'package:aplicacion_mensaje_m/presentation/providers/chat_provider.dart';
 import 'package:aplicacion_mensaje_m/presentation/widgets/her_message_bubble.dart';
 import 'package:aplicacion_mensaje_m/presentation/widgets/my_message_bubble.dart';
 import 'package:aplicacion_mensaje_m/presentation/widgets/shared/message_field_box.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatSreen extends StatefulWidget {
   final Function(ThemeData) changeTheme;
@@ -71,6 +74,8 @@ class _ButtonColor extends StatelessWidget {
 class _ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final chatProvider = context.watch<ChatProvider>();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -78,11 +83,13 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
                 child: ListView.builder(
-              itemCount: 20,
+              itemCount: chatProvider.messageList.length,
               itemBuilder: (context, index) {
-                return (index % 2 == 0)
-                    ? const HerMessageBubble()
-                    : const MyMessageBubble();
+                final message = chatProvider.messageList[index];
+
+                return (message.froWho == FroWho.hers)
+                    ? HerMessageBubble(message: chatProvider.messageList[index].text)
+                    : MyMessageBubble(message: chatProvider.messageList[index].text,);
               },
             )),
             //Caja de texto de mensaje
